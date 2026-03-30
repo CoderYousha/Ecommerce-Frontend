@@ -7,7 +7,7 @@ function ForgotPassword() {
         <>
             <Box>
                 <Box className="w-1/2 h-screen float-right relative max-sm:hidden">
-                    <img src={Background} className='h-full' />
+                    <img src={Background} className='h-full float-right' />
                 </Box>
                 <Box className=''>
                     <Box className='w-1/2 h-screen flex justify-center items-center max-sm:w-full'>
@@ -34,6 +34,15 @@ function ForgotPassword() {
                                             characterFilled: "character--filled",
                                         }}
                                     />
+                                </Box>
+                            </Box>
+                            <Box className='hidden'>
+                                <Typography variant='body1'>New Password</Typography>
+                                <input type='password' className='w-full py-2 rounded-lg indent-2 outline-none bg-purple-100' />
+                                <Typography className="!mt-5" variant='body1'>Confirm Password</Typography>
+                                <input type='password' className='w-full py-2 rounded-lg indent-2 outline-none bg-purple-100' />
+                                <Box className='mx-auto w-fit my-5'>
+                                    <Button variant='outlined' className='!rounded-full w-32 !border-green-500 !bg-green-500 !text-white hover:!bg-white hover:!text-green-500'>Reset</Button>
                                 </Box>
                             </Box>
                         </Box>
