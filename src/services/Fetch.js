@@ -1,10 +1,10 @@
 import React from "react";
 
-async function Fetch (link, method, data=null){
+async function Fetch (link, method, data=null, token){
      let result = await fetch(link, {
           method: method,
           headers: {
-               'Authorization': `Bearer ${localStorage.getItem('token')}`,
+               'Authorization': `Bearer ${token ?? localStorage.getItem('token')}`,
                'Accept': 'application/json',
           },
           body: data

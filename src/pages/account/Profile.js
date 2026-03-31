@@ -22,13 +22,20 @@ import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 import GTranslateOutlinedIcon from '@mui/icons-material/GTranslateOutlined';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import AuthContext from "../../context/AuthContext";
+import UpdateProfile from "../../popup/UpdateProfile.js";
+import useSnackBar from "../../hooks/UseSnackBar";
+import SnackbarAlert from "../../components/SnackBar";
+import UpdatePassword from "../../popup/UpdatePassword.js";
+import Fetch from "../../services/Fetch.js";
+import { buildUpdateProfileFormData } from "../../helper/UpdateProfileFormData.js";
 
 function Profile() {
     const theme = useTheme();
     const { wait, profile } = useContext(AuthContext);
     const { language, host } = useConstants();
+    const { openSnackBar, type, message, setOpenSnackBar, setSnackBar } = useSnackBar();
     const { setPopup } = usePopups();
-    const { sendWait } = useWaits();
+    const { sendWait, setSendWait } = useWaits();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const [lang, setLang] = useState(language);
@@ -42,6 +49,31 @@ function Profile() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const changeLanguage = async (language) => {
+        setSendWait(true);
+
+        const formData = buildUpdateProfileFormData({
+            fullName: profile.full_name,
+            email: profile.email,
+            phone: profile.phone,
+            whatsappPhone: profile.whatsapp_phone,
+            language: language
+        });
+
+        let result = await Fetch(host + '/api/profile', 'post', formData);
+
+        if (result.status === 200) {
+            setSnackBar('success', <FormattedMessage id="updated_success" />);
+            localStorage.setItem('language', language);
+            handleClose();
+            window.location.reload();
+        } else if (result.status === 422) {
+            setSnackBar('error', result.data.errors[0]);
+        }
+
+        setSendWait(false);
+    }
 
     return (
         <>
@@ -74,9 +106,9 @@ function Profile() {
                                         <EmailOutlinedIcon className="ml-5" />
                                         <Typography variant="body2" className="!ml-5">{profile.email}</Typography>
                                         <LocalPhoneOutlinedIcon className="ml-5" />
-                                        <Typography variant="body2" dir="ltr" className="!ml-5">{profile.phone}</Typography>
+                                        <Typography variant="body2" dir="ltr" className="!ml-5">+{profile.phone}</Typography>
                                         <WhatsAppIcon className="ml-5" />
-                                        <Typography variant="body2" dir="ltr" className="!ml-5">{profile.whatsapp_phone}</Typography>
+                                        <Typography variant="body2" dir="ltr" className="!ml-5">+{profile.whatsapp_phone}</Typography>
                                     </Box>
                                     <Button sx={{ backgroundImage: 'linear-gradient(to right, #C491F7, #A855F7)' }} className="!rounded-full" variant="contained" onClick={() => setPopup('update', 'flex')}>
                                         <EditOutlinedIcon />
@@ -226,7 +258,7 @@ function Profile() {
                             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                             dir="rtl"
                         >
-                            <MenuItem sx={{ background: lang === 'en' && '#F3F4F6' }} onClick={() => { setLang('en'); }}>
+                            <MenuItem sx={{ background: lang === 'en' && '#F3F4F6' }} onClick={() => changeLanguage('en')}>
                                 <ListItemIcon className="ml-5">
                                     {
                                         sendWait && lang === 'en' ?
@@ -237,7 +269,7 @@ function Profile() {
                                 </ListItemIcon>
                                 <FormattedMessage id="english_language" />
                             </MenuItem>
-                            <MenuItem sx={{ background: lang === 'ar' && '#F3F4F6' }} className="!mt-5" onClick={() => { setLang('ar'); }}>
+                            <MenuItem sx={{ background: lang === 'ar' && '#F3F4F6' }} className="!mt-5" onClick={() => changeLanguage('ar')}>
                                 <ListItemIcon className="ml-5">
                                     {
                                         sendWait && lang === 'ar' ?
@@ -251,6 +283,19 @@ function Profile() {
                         </Menu>
                     </Box>
             }
+
+            {/* Update Profile Popup */}
+            <Box id="update" className="w-screen h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center max-sm:left-0">
+                <UpdateProfile onClickCancel={() => setPopup('update', 'none')} setSnackBar={setSnackBar} />
+            </Box>
+
+            {/* Update Password Popup */}
+            <Box id="update-password" className="w-screen h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center max-sm:left-0">
+                <UpdatePassword onClickCancel={() => setPopup('update-password', 'none')} setSnackBar={setSnackBar} />
+            </Box>
+
+            {/* Snackbar Alert */}
+            <SnackbarAlert open={openSnackBar} message={message} severity={type} onClose={() => setOpenSnackBar(false)} />
         </>
     );
 }

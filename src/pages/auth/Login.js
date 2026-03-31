@@ -9,7 +9,7 @@ import Fetch from '../../services/Fetch';
 import { useNavigate } from 'react-router-dom';
 import { useWaits } from '../../hooks/UseWait';
 import CheckLogin from '../../services/CheckLogin';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function Login() {
     const { host } = useConstants();
@@ -39,6 +39,7 @@ function Login() {
 
         if (result.status === 200) {
             localStorage.setItem('token', result.data.data.token);
+            localStorage.setItem('language', result.data.data.data.language);
             navigate('/profile');
         } else if (result.status === 400) {
             setSnackBar('error', result.data.error)
