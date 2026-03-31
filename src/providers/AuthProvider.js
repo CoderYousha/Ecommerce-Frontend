@@ -20,7 +20,7 @@ function AuthProvider({ children, role = null }) {
                               navigate(-1);
                          }
                     }
-                    setProfile(result.data);
+                    setProfile(result.data.data);
                } catch (err) {
                     console.error(err);
                     navigate("/login");

@@ -75,7 +75,7 @@ function Login() {
                                 <input onChange={(e) => setEmail(e.target.value)} type='text' className='w-full py-2 rounded-lg indent-2 outline-none bg-purple-100' />
                                 <Typography variant='body1' className='!mt-3'>Password</Typography>
                                 <input onChange={(e) => setPassword(e.target.value)} type='password' className='w-full py-2 rounded-lg indent-2 outline-none bg-purple-100' />
-                                <Typography variant='body1' className='!my-3 cursor-pointer text-gray-600 hover:text-purple-500'>Forgot Password?</Typography>
+                                <Typography onClick={() => navigate('/forgot-password')} variant='body1' className='!my-3 cursor-pointer text-gray-600 hover:text-purple-500'>Forgot Password?</Typography>
                                 <Box className='mx-auto w-fit'>
                                     <Button onClick={login} variant='outlined' className='!rounded-full w-32 !border-green-500 !bg-green-500 !text-white hover:!bg-white hover:!text-green-500'>
                                         {
