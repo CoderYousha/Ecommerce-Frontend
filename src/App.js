@@ -9,6 +9,8 @@ import Translation from './translation/Translation';
 import { IntlProvider } from 'react-intl';
 import { useConstants } from './hooks/UseConstants';
 import AuthRoutes from './routes/AuthRoutes';
+import AccountRoutes from './routes/AccountRoutes';
+import Sidebar from './components/Sidebar';
 
 function App() {
   const { language } = useConstants();
@@ -24,6 +26,11 @@ function App() {
               {
                 AuthRoutes().map((route, index) =>
                   <Route key={index} path={route.path} element={route.element} />
+                )
+              }
+              {
+                AccountRoutes().map((route, index) =>
+                  <Route key={index} path={route.path} element={<>{route.element}</>} />
                 )
               }
             </Routes>

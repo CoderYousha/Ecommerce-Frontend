@@ -3,8 +3,16 @@
 }
 
 .active {
-     color: blue;
-     background-color: #bfdbfe;
+     color: white;
+     background-color: #A855F7;
+}
+
+.active h6{
+     color: white !important;
+}
+
+.active svg{
+     color: white;
 }
 
 .css-c7qa1g-MuiChartsWrapper-root {

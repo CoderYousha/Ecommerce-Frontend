@@ -1,0 +1,26 @@
+import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
+import PhoneInput from "react-phone-input-2";
+
+<Box className='w-4/5 h-screen flex items-center float-right'>
+    <Box className='w-2/3 bg-white shadow-lg rounded-lg relative mx-auto mt-10 px-2 py-5'>
+        <Box className='w-32 h-32 rounded-full bg-gray-200 flex justify-center items-center mx-auto my-10'>
+            <AddPhotoAlternateOutlinedIcon fontSize="large" />
+        </Box>
+        <Box>
+            <Box className='flex justify-between'>
+                <TextField variant="outlined" label='Full Name' className="w-1/3" />
+                <TextField aria-readonly variant="outlined" label='Email' className="w-1/3" />
+            </Box>
+            <Box className='flex justify-between'>
+                <Box dir="ltr" className="w-1/3 h-14 mt-5 max-sm:h-12">
+                    <PhoneInput country={'us'} containerStyle={{ width: "100%" }} inputStyle={{ width: '100%' ,
+                        height: "100%" }} />
+                </Box>
+                <Box dir="ltr" className="w-1/3 h-14 mt-5 max-sm:h-12">
+                    <PhoneInput country={'us'} containerStyle={{ width: "100%" }} inputStyle={{ width: '100%' ,
+                        height: "100%" }} />
+                </Box>
+            </Box>
+        </Box>
+    </Box>
+</Box>

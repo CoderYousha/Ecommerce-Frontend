@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 async function CheckLogin(host) {
 
-     let result = await fetch(host + '/account/get-profile', {
+     let result = await fetch(host + '/api/profile', {
           method: "GET",
           headers: {
                'Authorization': `Bearer ${localStorage.getItem('token')}`,
