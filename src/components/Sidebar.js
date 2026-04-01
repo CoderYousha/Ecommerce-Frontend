@@ -21,9 +21,9 @@ function Sidebar() {
             "path": "/employees",
         },
         {
-            "title": <FormattedMessage id="users" />,
+            "title": <FormattedMessage id="clients" />,
             "icon": <Person2OutlinedIcon fontSize="large" className="text-purple-500" />,
-            "path": "/users",
+            "path": "/clients",
         },
         {
             "title": <FormattedMessage id="categories" />,

@@ -1,3 +1,4 @@
+import Clients from "../pages/users/Clients";
 import Employees from "../pages/users/Employees";
 
 function UserRoutes (){
@@ -5,7 +6,11 @@ function UserRoutes (){
         {
             path: "/employees",
             element: <Employees />
-        }
+        },
+        {
+            path: "/clients",
+            element: <Clients />
+        },
     ];
 }
 

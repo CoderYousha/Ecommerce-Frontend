@@ -16,7 +16,7 @@ function DeleteDialog({ onClickConfirm, onClickCancel, title, subtitle, hasInput
                 <img src={DeleteImage} className="" />
             </Box>
             <Typography className="text-center !font-semibold" variant="h6">{title}</Typography>
-            <Typography className="text-center !my-3" variant="body2" dir="rtl">{subtitle}</Typography>
+            <Typography className="text-center !my-3" variant="body2" dir={language === 'en' ? 'lrt' : 'rtl'}>{subtitle}</Typography>
             {
                 hasInput &&
                 <TextField dir="rtl" multiline rows={4} placeholder={placeholder} className="w-full" variant="outlined" label={label} />

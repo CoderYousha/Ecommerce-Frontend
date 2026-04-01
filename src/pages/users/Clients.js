@@ -19,7 +19,7 @@ import AddUser from "../../popup/AddUser";
 import UpdateUser from "../../popup/UpdateUser";
 import DeleteDialog from "../../popup/DeleteDialog";
 
-function Employees() {
+function Clients() {
     const { language, host } = useConstants();
     const { wait } = useContext(AuthContext);
     const theme = useTheme();
@@ -30,41 +30,42 @@ function Employees() {
     const { StyledTableCell, StyledTableRow } = useTableStyles();
     const { openSnackBar, type, message, setSnackBar, setOpenSnackBar } = useSnackBar();
     const { page, setPage, currentPage, setCurrentPage, totalPages, setTotalPages } = usePagination();
-    const [employeesCounts, setEmployeesCounts] = useState();
-    const [employees, setEmployees] = useState([]);
-    const [employee, setEmployee] = useState();
+    const [clientsCounts, setClientsCounts] = useState();
+    const [clients, setClients] = useState([]);
+    const [client, setClient] = useState();
 
-    {/* Get Employees Function */ }
-    const getEmployees = async () => {
-        let result = await Fetch(host + `/admin/users?role=employee&page=${page + 1}&search=${search}`, 'GET', null);
+    {/* Get Clients Function */ }
+    const getClients = async () => {
+        let result = await Fetch(host + `/admin/users?role=user&page=${page + 1}&search=${search}`, 'GET', null);
         if (result.status === 200) {
             setTotalPages(result.data.data.pagination.last_page);
-            setEmployeesCounts(result.data.data.pagination.total);
-            setEmployees(result.data.data.users);
+            setClientsCounts(result.data.data.pagination.total);
+            setClients(result.data.data.users);
             setCurrentPage(page);
         }
 
         setGetWait(false);
     }
 
-    {/*  Get Specefic Employee Details */ }
-    const employeeDetails = async (id) => {
-        setEmployee(employees.filter((employee) => employee.id === id)[0]);
+    {/*  Get Specefic Client Details */ }
+    const clientDetails = async (id) => {
+        setClient(clients.filter((client) => client.id === id)[0]);
     }
 
-    {/* Delete Employee Function */ }
-    const deleteEmployee = async () => {
-        let result = await Fetch(host + `/admin/users/${employee.id}`, 'DELETE', null);
+    {/* Delete Client Function */ }
+    const deleteClient = async () => {
+        let result = await Fetch(host + `/admin/users/${client.id}`, 'DELETE', null);
 
         if (result.status === 200) {
-            setEmployees((prevEmployees) => prevEmployees.filter((prevEmployee) => prevEmployee.id !== employee.id));
+            setClients((prevClients) => prevClients.filter((prevClient) => prevClient.id !== client.id));
+            setClientsCounts(clientsCounts-1);
             setSnackBar('success', <FormattedMessage id="deleted_success" />);
-            setEmployee('');
+            setClient('');
         }
     }
 
     useEffect(() => {
-        getEmployees();
+        getClients();
     }, [page, search]);
 
     return (
@@ -86,10 +87,10 @@ function Employees() {
                                     <Box sx={{ backgroundColor: theme.palette.background.paper }} className="bg-white rounded-xl px-2">
                                         {/* Top Section */}
                                         <Box sx={{ backgroundColor: theme.palette.background.default }} className="flex justify-between items-center px-2">
-                                            <Typography variant="h5" className="py-2 px-3 max-sm:!text-lg"><FormattedMessage id='employees' /></Typography>
+                                            <Typography variant="h5" className="py-2 px-3 max-sm:!text-lg"><FormattedMessage id='clients' /></Typography>
                                             <Button variant="contained" onClick={() => setPopup('add', 'flex')} className="!bg-purple-500">
                                                 <AddIcon />
-                                                <FormattedMessage id='add_employee' />
+                                                <FormattedMessage id='add_client' />
                                             </Button>
                                         </Box>
 
@@ -101,7 +102,7 @@ function Employees() {
                                                     <Box className="w-full flex items-center">
                                                         {/* <FilterAltOutlinedIcon onClick={() => setPopup('filter', 'flex')} className="cursor-pointer" fontSize="large" /> */}
                                                         <Box className="w-2/4 relative mr-3 max-sm:w-full">
-                                                            <input style={{ backgroundColor: theme.palette.background.default }} onChange={(e) => setSearch(e.target.value)} className="w-11/12 h-12 rounded-md border indent-14 outline-none max-sm:w-full" placeholder={intl.formatMessage({ id: "search_employees" })} />
+                                                            <input style={{ backgroundColor: theme.palette.background.default }} onChange={(e) => setSearch(e.target.value)} className="w-11/12 h-12 rounded-md border indent-14 outline-none max-sm:w-full" placeholder={intl.formatMessage({ id: "search_clients" })} />
                                                             <SearchOutlinedIcon className="absolute top-1/2 -translate-y-1/2 right-3 text-gray-500" sx={{ right: language === 'en' && '90%' }} />
                                                         </Box>
                                                     </Box>
@@ -111,7 +112,7 @@ function Employees() {
                                                             <option value='first_name'><FormattedMessage id='teacher_name' /></option>
                                                             <option value="email"><FormattedMessage id='email' /></option>
                                                         </select> */}
-                                                        <Typography variant="body1" className="!text-gray-500"><FormattedMessage id='total_employees' />: {employeesCounts}</Typography>
+                                                        <Typography variant="body1" className="!text-gray-500"><FormattedMessage id='total_clients' />: {clientsCounts}</Typography>
                                                     </Box>
                                                 </Box>
 
@@ -129,25 +130,25 @@ function Employees() {
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
-                                                        {employees.map((employee, index) => (
+                                                        {clients.map((client, index) => (
                                                             <StyledTableRow key={index} className="hover:bg-gray-200 duration-100 cursor-pointer">
                                                                 <StyledTableCell align={language === 'en' ? "left" : "right"} component="th" scope="row">
                                                                     {
-                                                                        employee.image ?
-                                                                            <Avatar className="w-10 h-10" alt="Cindy Baker" src={`${host}/${employee.image}`} />
+                                                                        client.image ?
+                                                                            <Avatar className="w-10 h-10" alt="Cindy Baker" src={`${host}/${client.image}`} />
                                                                             :
                                                                             <Box className='w-10 h-10 rounded-full bg-gray-400 text-white text-3xl flex justify-center items-center'>
-                                                                                {employee.full_name.charAt(0)}
+                                                                                {client.full_name.charAt(0)}
                                                                             </Box>
                                                                     }
                                                                 </StyledTableCell>
-                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{employee.full_name}</StyledTableCell>
-                                                                <StyledTableCell align={language === 'en' ? "left" : "right"}>{employee.email}</StyledTableCell>
-                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="text-center">+{employee.phone}</StyledTableCell>
-                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">+{employee.whatsapp_phone}</StyledTableCell>
+                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{client.full_name}</StyledTableCell>
+                                                                <StyledTableCell align={language === 'en' ? "left" : "right"}>{client.email}</StyledTableCell>
+                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="text-center">+{client.phone}</StyledTableCell>
+                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">+{client.whatsapp_phone}</StyledTableCell>
                                                                 <StyledTableCell align={language === 'en' ? "left" : "right"} className="">
                                                                     {
-                                                                        employee.status ?
+                                                                        client.status ?
                                                                             <Typography variant="body1" fontWeight={800} color="success"><FormattedMessage id="active" /></Typography>
                                                                             :
                                                                             <Typography variant="body1" fontWeight={800} color="error"><FormattedMessage id="deactive" /></Typography>
@@ -155,8 +156,8 @@ function Employees() {
                                                                 </StyledTableCell>
                                                                 <StyledTableCell align="right">
                                                                     <Box className="!flex justify-around items-center">
-                                                                        <Button variant="contained" className="!bg-red-300 !font-bold !text-red-800 hover:!bg-red-500 hover:!text-white duration-300" onClick={(e) => { employeeDetails(employee.id); setPopup('delete', 'flex') }}><FormattedMessage id='delete' /></Button>
-                                                                        <Button variant="contained" className="!bg-green-300 !font-bold !text-green-800 hover:!bg-green-500 hover:!text-white duration-300" onClick={(e) => { employeeDetails(employee.id); setPopup('update', 'flex') }}><FormattedMessage id='update' /></Button>
+                                                                        <Button variant="contained" className="!bg-red-300 !font-bold !text-red-800 hover:!bg-red-500 hover:!text-white duration-300" onClick={(e) => { clientDetails(client.id); setPopup('delete', 'flex') }}><FormattedMessage id='delete' /></Button>
+                                                                        <Button variant="contained" className="!bg-green-300 !font-bold !text-green-800 hover:!bg-green-500 hover:!text-white duration-300" onClick={(e) => { clientDetails(client.id); setPopup('update', 'flex') }}><FormattedMessage id='update' /></Button>
                                                                     </Box>
                                                                 </StyledTableCell>
                                                             </StyledTableRow>
@@ -180,19 +181,19 @@ function Employees() {
                             }
                         </Box>
 
-                        {/* Add New Employee Popup */}
+                        {/* Add New Client Popup */}
                         <Box id="add" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center max-sm:left-0">
-                            <AddUser setUsers={setEmployees} accountRole='employee' onClickCancel={() => setPopup('add', 'none')} setSnackBar={setSnackBar} />
+                            <AddUser setUsers={setClients} accountRole='user' onClickCancel={() => setPopup('add', 'none')} setSnackBar={setSnackBar} />
                         </Box>
 
-                        {/* Update Employee Popup */}
+                        {/* Update Client Popup */}
                         <Box id="update" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center max-sm:left-0">
-                            <UpdateUser user={employee} onClickCancel={() => setPopup('update', 'none')} getUsers={getEmployees} setSnackBar={setSnackBar} />
+                            <UpdateUser user={client} onClickCancel={() => setPopup('update', 'none')} getUsers={getClients} setSnackBar={setSnackBar} />
                         </Box>
 
-                        {/* Delete Employee Popup */}
+                        {/* Delete Client Popup */}
                         <Box id="delete" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center max-sm:left-0">
-                            <DeleteDialog onClickConfirm={deleteEmployee} onClickCancel={() => setPopup('delete', 'none')} title={<FormattedMessage id="delete_employee_title" />} subtitle={<FormattedMessage id="delete_employee_description" />} />
+                            <DeleteDialog onClickConfirm={deleteClient} onClickCancel={() => setPopup('delete', 'none')} title={<FormattedMessage id="delete_client_title" />} subtitle={<FormattedMessage id="delete_client_description" />} />
                         </Box>
 
                         {/* Snackbar Alert */}
@@ -203,4 +204,4 @@ function Employees() {
     );
 }
 
-export default Employees;
+export default Clients;
