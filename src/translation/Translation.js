@@ -83,6 +83,13 @@ function Translation() {
             products: "Products",
             orders: "Orders",
             banners: "Banners",
+            image: "Image",
+            add_employee: "Add New Employee",
+            search_employees: "Search Employees by Name or Email",
+            total_employees: "Total Employees",
+            status: "Status",
+            active: "Active",
+            deactive: "Deactive",
         },
         ar: {
             procedures: "الإجراءات",
@@ -169,6 +176,13 @@ function Translation() {
             products: "المنتجات",
             orders: "الطلبات",
             banners: "الإعلانات",
+            image: "الصورة",
+            add_employee: "إضافة موظف جديد",
+            search_employees: "البحث عن موظفين من خلال الاسم أو البريد الإلكتروني",
+            total_employees: "إجمالي الموظفين",
+            status: "الحالة",
+            active: "نشط",
+            deactive: "غير نشط",
         }
     };
 }

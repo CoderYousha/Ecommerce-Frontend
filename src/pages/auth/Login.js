@@ -39,7 +39,7 @@ function Login() {
 
         if (result.status === 200) {
             localStorage.setItem('token', result.data.data.token);
-            localStorage.setItem('language', result.data.data.data.language);
+            localStorage.setItem('language', result.data.data.user.language);
             navigate('/profile');
         } else if (result.status === 400) {
             setSnackBar('error', result.data.error)

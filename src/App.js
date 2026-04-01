@@ -11,6 +11,7 @@ import { useConstants } from './hooks/UseConstants';
 import AuthRoutes from './routes/AuthRoutes';
 import AccountRoutes from './routes/AccountRoutes';
 import Sidebar from './components/Sidebar';
+import UserRoutes from './routes/UserRoutes';
 
 function App() {
   const { language } = useConstants();
@@ -31,6 +32,11 @@ function App() {
               {
                 AccountRoutes().map((route, index) =>
                   <Route key={index} path={route.path} element={<AuthProvider>{route.element}</AuthProvider>} />
+                )
+              }
+              {
+                UserRoutes().map((route, index) =>
+                  <Route key={index} path={route.path} element={<AuthProvider><Sidebar />{route.element}</AuthProvider>} />
                 )
               }
             </Routes>
