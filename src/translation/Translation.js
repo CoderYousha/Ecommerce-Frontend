@@ -100,6 +100,14 @@ function Translation() {
             delete_client_title: "Delete Client",
             delete_client_description: "Are you sure that you want delete this client?",
             clients: "Clients",
+            categories: "Categories",
+            add_category: "Add New Category",
+            search_category: "Search Categories by Name",
+            total_categories: "Total Categories",
+            category: "Category",
+            delete_category_title: "Delete Category",
+            delete_category_description: "Are you sure that you want delete this category?",
+            update_category: "Update Category",
         },
         ar: {
             procedures: "الإجراءات",
@@ -203,6 +211,14 @@ function Translation() {
             delete_client_title: "حذف العميل",
             delete_client_description: "هل أنت متأكد أنك ترغب بحذف هذا العميل؟",
             clients: "العملاء",
+            categories: "الأصناف",
+            add_category: "إضافة صنف جديد",
+            search_category: "البحث عن أصناف من خلال الاسم",
+            total_categories: "إجمال الأصناف",
+            category: "الصنف",
+            delete_category_title: "حذف الصنف",
+            delete_category_description: "هل أنت متأكد أنك ترغب بحذف هذا الصنف؟",
+            update_category: "تعديل الصنف",
         }
     };
 }
