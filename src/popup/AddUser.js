@@ -77,19 +77,19 @@ function AddUser({ onClickCancel, setSnackBar, setUsers, accountRole }) {
             <CloseIcon onClick={() => { resetValue(); onClickCancel(); }} className="text-gray-700 cursor-pointer absolute top-5 left-5" fontSize="large" sx={{ left: language === 'en' && '90%' }}></CloseIcon>
             <Divider className="!my-5" />
             <Box>
-                <Box className='flex justify-between'>
-                    <TextField variant="outlined" label='Full Name' className="w-2/5" value={fullName} onChange={(e) => setFullName(e.target.value)} />
-                    <TextField variant="outlined" label='Email' className="w-2/5" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <Box className='flex justify-between max-sm:flex-col'>
+                    <TextField variant="outlined" label='Full Name' className="w-2/5 max-sm:w-full" value={fullName} onChange={(e) => setFullName(e.target.value)} />
+                    <TextField variant="outlined" label='Email' className="w-2/5 max-sm:w-full max-sm:!mt-3" value={email} onChange={(e) => setEmail(e.target.value)} />
                 </Box>
-                <Box className='flex justify-between'>
-                    <Box dir="ltr" className="w-2/5 h-14 mt-5 max-sm:h-12">
+                <Box className='flex justify-between max-sm:flex-col'>
+                    <Box dir="ltr" className="w-2/5 h-14 mt-5 max-sm:h-12 max-sm:w-full">
                         <Typography variant="body2" className="!mb-2"><FormattedMessage id="phone" /></Typography>
                         <PhoneInput value={phone} onChange={handlePhone} country={'us'} containerStyle={{ width: "100%" }} inputStyle={{
                             width: '100%',
                             height: "100%"
                         }} />
                     </Box>
-                    <Box dir="ltr" className="w-2/5 h-14 mt-5 max-sm:h-12">
+                    <Box dir="ltr" className="w-2/5 h-14 mt-5 max-sm:h-12 max-sm:w-full max-sm:mt-10">
                         <Typography variant="body2" className="!mb-2"><FormattedMessage id="whatsapp_phone" /></Typography>
                         <PhoneInput value={whatsappPhone} onChange={handleWhatsapp} country={'us'} containerStyle={{ width: "100%" }} inputStyle={{
                             width: '100%',
@@ -97,9 +97,9 @@ function AddUser({ onClickCancel, setSnackBar, setUsers, accountRole }) {
                         }} />
                     </Box>
                 </Box>
-                <Box className='flex justify-between mt-16'>
-                    <TextField type="password" variant="outlined" label={<FormattedMessage id="password" />} className="w-2/5" value={password} onChange={(e) => setPassword(e.target.value)} />
-                    <TextField type="password" variant="outlined" label={<FormattedMessage id="confirm_password" />} className="w-2/5" value={passwordConfirmation} onChange={(e) => setPasswordConfirmation(e.target.value)} />
+                <Box className='flex justify-between max-sm:flex-col mt-16'>
+                    <TextField type="password" variant="outlined" label={<FormattedMessage id="password" />} className="w-2/5 max-sm:w-full" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <TextField type="password" variant="outlined" label={<FormattedMessage id="confirm_password" />} className="w-2/5 max-sm:w-full max-sm:!mt-3" value={passwordConfirmation} onChange={(e) => setPasswordConfirmation(e.target.value)} />
                 </Box>
                 <FormControlLabel
                     control={<Checkbox checked={status} onChange={(e) => setStatus(e.target.checked)} />}
@@ -110,7 +110,7 @@ function AddUser({ onClickCancel, setSnackBar, setUsers, accountRole }) {
                     <Typography variant="body1" className="text-gray-700"><FormattedMessage id="add_image" /></Typography>
                     <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} className="w-full h-full opacity-0 absolute cursor-pointer" />
                 </Box>
-                <Box className='mx-auto w-1/3 mt-10'>
+                <Box className='mx-auto w-1/3 mt-10 max-sm:w-full'>
                     <Button onClick={addUser} variant='outlined' className='!rounded-full w-full !border-green-500 !bg-green-500 !text-white hover:!bg-white hover:!text-green-500'>
                         {
                             sendWait ?

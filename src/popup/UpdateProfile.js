@@ -69,19 +69,19 @@ function UpdateProfile({ onClickCancel, setSnackBar }) {
             <CloseIcon onClick={() => { resetValue(); onClickCancel(); }} className="text-gray-700 cursor-pointer absolute top-5 left-5" fontSize="large" sx={{ left: language === 'en' && '90%' }}></CloseIcon>
             <Divider className="!my-5" />
             <Box>
-                <Box className='flex justify-between'>
-                    <TextField variant="outlined" label='Full Name' className="w-2/5" value={fullName} onChange={(e) => setFullName(e.target.value)} />
-                    <TextField aria-readonly variant="outlined" label='Email' className="w-2/5" value={email} />
+                <Box className='flex justify-between max-sm:flex-col'>
+                    <TextField variant="outlined" label='Full Name' className="w-2/5 max-sm:w-full" value={fullName} onChange={(e) => setFullName(e.target.value)} />
+                    <TextField aria-readonly variant="outlined" label='Email' className="w-2/5 max-sm:w-full max-sm:!mt-3" value={email} />
                 </Box>
-                <Box className='flex justify-between'>
-                    <Box dir="ltr" className="w-2/5 h-14 mt-5 max-sm:h-12">
+                <Box className='flex justify-between max-sm:flex-col'>
+                    <Box dir="ltr" className="w-2/5 h-14 mt-5 max-sm:h-12 max-sm:w-full">
                         <Typography variant="body2" className="!mb-2"><FormattedMessage id="phone" /></Typography>
                         <PhoneInput value={phone} onChange={handlePhone} country={'us'} containerStyle={{ width: "100%" }} inputStyle={{
                             width: '100%',
                             height: "100%"
                         }} />
                     </Box>
-                    <Box dir="ltr" className="w-2/5 h-14 mt-5 max-sm:h-12">
+                    <Box dir="ltr" className="w-2/5 h-14 mt-5 max-sm:h-12 max-sm:w-full max-sm:!mt-10">
                         <Typography variant="body2" className="!mb-2"><FormattedMessage id="whatsapp_phone" /></Typography>
                         <PhoneInput value={whatsappPhone} onChange={handleWhatsapp} country={'us'} containerStyle={{ width: "100%" }} inputStyle={{
                             width: '100%',
@@ -94,7 +94,7 @@ function UpdateProfile({ onClickCancel, setSnackBar }) {
                     <Typography variant="body1" className="text-gray-700"><FormattedMessage id="add_image" /></Typography>
                     <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} className="w-full h-full opacity-0 absolute cursor-pointer" />
                 </Box>
-                <Box className='mx-auto w-1/3 mt-10'>
+                <Box className='mx-auto w-1/3 mt-10 max-sm:w-full'>
                     <Button onClick={updateProfile} variant='outlined' className='!rounded-full w-full !border-green-500 !bg-green-500 !text-white hover:!bg-white hover:!text-green-500'>
                         {
                             sendWait ?

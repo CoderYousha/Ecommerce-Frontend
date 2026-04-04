@@ -115,7 +115,7 @@ function Employees() {
                                                     </Box>
                                                 </Box>
 
-                                                {/* Teachers Table */}
+                                                {/* Employees Table */}
                                                 <Table className="" sx={{ minWidth: 700 }} aria-label="customized table">
                                                     <TableHead className="bg-gray-200">
                                                         <TableRow sx={{ backgroundColor: theme.palette.background.paper }}>
@@ -181,17 +181,17 @@ function Employees() {
                         </Box>
 
                         {/* Add New Employee Popup */}
-                        <Box id="add" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center max-sm:left-0">
+                        <Box id="add" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center ">
                             <AddUser setUsers={setEmployees} accountRole='employee' onClickCancel={() => setPopup('add', 'none')} setSnackBar={setSnackBar} />
                         </Box>
 
                         {/* Update Employee Popup */}
-                        <Box id="update" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center max-sm:left-0">
+                        <Box id="update" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center ">
                             <UpdateUser user={employee} onClickCancel={() => setPopup('update', 'none')} getUsers={getEmployees} setSnackBar={setSnackBar} />
                         </Box>
 
                         {/* Delete Employee Popup */}
-                        <Box id="delete" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center max-sm:left-0">
+                        <Box id="delete" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center ">
                             <DeleteDialog onClickConfirm={deleteEmployee} onClickCancel={() => setPopup('delete', 'none')} title={<FormattedMessage id="delete_employee_title" />} subtitle={<FormattedMessage id="delete_employee_description" />} />
                         </Box>
 

@@ -5,7 +5,7 @@ import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined';
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import AuthContext from "../context/AuthContext";
 import { useContext } from "react";
@@ -14,6 +14,7 @@ import { useConstants } from "../hooks/UseConstants";
 function Sidebar() {
     const {host} = useConstants();
     const { wait, profile } = useContext(AuthContext);
+    const navigate = useNavigate();
     const contents = [
         {
             "title": <FormattedMessage id="employees" />,
@@ -56,9 +57,9 @@ function Sidebar() {
                         <Box className='px-1 py-1 border border-purple-400 border-r-4 border-b-4 rounded-full relative'>
                             {
                                 profile.image ?
-                                    <Avatar className="w-10 h-10" alt="Cindy Baker" src={`${host}/${profile.image}`} />
+                                    <Avatar onClick={() => navigate('/profile')} className="w-10 h-10 cursor-pointer" alt="Cindy Baker" src={`${host}/${profile.image}`} />
                                     :
-                                    <Box className='w-10 h-10 rounded-full bg-gray-400 text-white text-3xl flex justify-center items-center'>
+                                    <Box onClick={() => navigate('/profile')} className='w-10 h-10 rounded-full bg-gray-400 text-white text-3xl flex justify-center items-center cursor-pointer'>
                                         {profile.full_name.charAt(0)}
                                     </Box>
                             }

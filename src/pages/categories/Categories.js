@@ -116,7 +116,7 @@ function Categories() {
                                                     </Box>
                                                 </Box>
 
-                                                {/* Teachers Table */}
+                                                {/* Categories Table */}
                                                 <Table className="" sx={{ minWidth: 700 }} aria-label="customized table">
                                                     <TableHead className="bg-gray-200">
                                                         <TableRow sx={{ backgroundColor: theme.palette.background.paper }}>
@@ -165,17 +165,17 @@ function Categories() {
                         </Box>
 
                         {/* Add New Category Popup */}
-                        <Box id="add" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center max-sm:left-0">
+                        <Box id="add" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center">
                             <AddCategory setCategories={setCategories} onClickCancel={() => setPopup('add', 'none')} setSnackBar={setSnackBar} />
                         </Box>
 
                         {/* Update Client Popup */}
-                        <Box id="update" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center max-sm:left-0">
+                        <Box id="update" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center">
                             <UpdateCategory category={category} onClickCancel={() => setPopup('update', 'none')} getCategories={getCategories} setSnackBar={setSnackBar} />
                         </Box>
 
                         {/* Delete Category Popup */}
-                        <Box id="delete" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center max-sm:left-0">
+                        <Box id="delete" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center">
                             <DeleteDialog onClickConfirm={deleteCategory} onClickCancel={() => setPopup('delete', 'none')} title={<FormattedMessage id="delete_category_title" />} subtitle={<FormattedMessage id="delete_category_description" />} />
                         </Box>
 

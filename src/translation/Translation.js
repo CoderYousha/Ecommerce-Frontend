@@ -108,6 +108,16 @@ function Translation() {
             delete_category_title: "Delete Category",
             delete_category_description: "Are you sure that you want delete this category?",
             update_category: "Update Category",
+            add_product: "Add New Product",
+            search_product: "Search Products by Name or Price",
+            total_products: "Total Products",
+            price: "Price",
+            amount: "Amount",
+            product: "Product",
+            update_product: "Update Product",
+            delete_product_title: "Delete Product",
+            delete_product_description: "Are you sure that you want delete this product?",
+            images: "Images",
         },
         ar: {
             procedures: "الإجراءات",
@@ -219,6 +229,16 @@ function Translation() {
             delete_category_title: "حذف الصنف",
             delete_category_description: "هل أنت متأكد أنك ترغب بحذف هذا الصنف؟",
             update_category: "تعديل الصنف",
+            add_product: "إضافة منتج جديد",
+            search_product: "البحث عن منتج من خلال الاسم أو السعر",
+            total_products: "إجمالي المنتجات",
+            price: "السعر",
+            amount: "الكمية",
+            product: "المنتج",
+            update_product: "تعديل المنتج",
+            delete_product_title: "حذف المنتج",
+            delete_product_description: "هل أنت متأكد أنك ترغب بحذف هذا المنتج؟",
+            images: "الصور",
         }
     };
 }

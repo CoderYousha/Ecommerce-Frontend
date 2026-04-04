@@ -102,7 +102,7 @@ function Profile() {
                                         <Typography variant="h5" fontWeight={800} className="">{profile.full_name}</Typography>
                                         <Typography variant="body2" className="!text-purple-600 w-fit h-full bg-purple-200 px-2 py-1 rounded-full !mx-3"><FormattedMessage id="general_manager" /></Typography>
                                     </Box>
-                                    <Box className="flex items-center my-5" sx={{ flexDirection: language === 'en' && 'row-reverse' }}>
+                                    <Box className="flex items-center my-5 max-sm:hidden" sx={{ flexDirection: language === 'en' && 'row-reverse' }}>
                                         <EmailOutlinedIcon className="ml-5" />
                                         <Typography variant="body2" className="!ml-5">{profile.email}</Typography>
                                         <LocalPhoneOutlinedIcon className="ml-5" />
@@ -110,13 +110,13 @@ function Profile() {
                                         <WhatsAppIcon className="ml-5" />
                                         <Typography variant="body2" dir="ltr" className="!ml-5">+{profile.whatsapp_phone}</Typography>
                                     </Box>
-                                    <Button sx={{ backgroundImage: 'linear-gradient(to right, #C491F7, #A855F7)' }} className="!rounded-full" variant="contained" onClick={() => setPopup('update', 'flex')}>
+                                    <Button sx={{ backgroundImage: 'linear-gradient(to right, #C491F7, #A855F7)' }} className="!rounded-full max-sm:w-full" variant="contained" onClick={() => setPopup('update', 'flex')}>
                                         <EditOutlinedIcon />
                                         <FormattedMessage id="update_profile" />
                                     </Button>
                                 </Box>
                             </Box>
-                            <Box className="h-full flex flex-col justify-between max-sm:flex-row max-sm:w-full max-sm:mt-5">
+                            <Box className="h-full flex flex-col justify-between max-sm:flex-row max-sm:w-full max-sm:mt-5 max-sm:hidden">
                                 <Box className="max-sm:flex">
                                     <Typography className="text-gray-400 max-sm:text-black max-sm:!ml-5" variant="body2"><FormattedMessage id="member_since" /></Typography>
                                     <Typography className="text-white max-sm:text-gray-600" variant="body2">{profile.created_at.split('T')[0]}</Typography>
@@ -285,12 +285,12 @@ function Profile() {
             }
 
             {/* Update Profile Popup */}
-            <Box id="update" className="w-screen h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center max-sm:left-0">
+            <Box id="update" className="w-screen h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center">
                 <UpdateProfile onClickCancel={() => setPopup('update', 'none')} setSnackBar={setSnackBar} />
             </Box>
 
             {/* Update Password Popup */}
-            <Box id="update-password" className="w-screen h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center max-sm:left-0">
+            <Box id="update-password" className="w-screen h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center">
                 <UpdatePassword onClickCancel={() => setPopup('update-password', 'none')} setSnackBar={setSnackBar} />
             </Box>
 
