@@ -1,23 +1,23 @@
-export function buildAddProductFormData ({
+export function buildAddBannerFormData({
     categoryId,
+    productId,
     nameEn,
     nameAr,
-    descriptionEn,
-    descriptionAr,
-    price,
-    amount,
+    startDate,
+    endDate,
+    status,
     images
-}){
+}) {
     const formData = new FormData();
 
     formData.append('category_id', categoryId);
+    formData.append('product_id', productId);
     formData.append('name_en', nameEn);
     formData.append('name_ar', nameAr);
-    formData.append('description_en', descriptionEn);
-    formData.append('description_ar', descriptionAr);
-    formData.append('price', price);
-    formData.append('amount', amount);
-    
+    formData.append('start_date', startDate);
+    formData.append('end_date', endDate);
+    formData.append('status', status);
+
     Array.from(images).forEach((image) => {
         formData.append('images[]', image);
     });

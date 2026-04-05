@@ -1,28 +1,26 @@
-import { Avatar, Box, Button, CircularProgress, Paper, Table, TableBody, TableContainer, TableHead, TableRow, Typography, useTheme } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import AuthContext from "../../context/AuthContext";
 import { useConstants } from "../../hooks/UseConstants";
+import AuthContext from "../../context/AuthContext";
+import { Avatar, Box, Button, CircularProgress, Paper, Table, TableBody, TableContainer, TableHead, TableRow, Typography, useTheme } from "@mui/material";
 import { useWaits } from "../../hooks/UseWait";
-import { FormattedMessage, useIntl } from "react-intl";
 import { usePopups } from "../../hooks/UsePopups";
 import { useSearch } from "../../hooks/UseSearch";
+import { FormattedMessage, useIntl } from "react-intl";
 import { useTableStyles } from "../../hooks/UseTableStyles";
-import { usePagination } from "../../hooks/UsePagination";
-import SnackbarAlert from "../../components/SnackBar";
 import useSnackBar from "../../hooks/UseSnackBar";
+import { usePagination } from "../../hooks/UsePagination";
+import Fetch from "../../services/Fetch";
 import AddIcon from '@mui/icons-material/Add';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import Fetch from "../../services/Fetch";
 import DeleteDialog from "../../popup/DeleteDialog";
-import AddCategory from "../../popup/AddCategory";
-import UpdateCategory from "../../popup/UpdateCategory";
-import AddProduct from "../../popup/AddProduct";
-import ProductImages from "../../popup/ProductImages";
-import UpdateProduct from "../../popup/UpdateProduct";
+import SnackbarAlert from "../../components/SnackBar";
+import BannerImages from "../../popup/BannerImages";
+import AddBanner from "../../popup/AddBanner";
+import UpdateBanner from "../../popup/UpdateBanner";
 
-function Products() {
+function Banners() {
     const { language, host } = useConstants();
     const { wait } = useContext(AuthContext);
     const theme = useTheme();
@@ -33,42 +31,42 @@ function Products() {
     const { StyledTableCell, StyledTableRow } = useTableStyles();
     const { openSnackBar, type, message, setSnackBar, setOpenSnackBar } = useSnackBar();
     const { page, setPage, currentPage, setCurrentPage, totalPages, setTotalPages } = usePagination();
-    const [productsCounts, setProductsCounts] = useState();
-    const [products, setProducts] = useState([]);
-    const [product, setProduct] = useState();
+    const [bannersCounts, setBannersCounts] = useState();
+    const [banners, setBanners] = useState([]);
+    const [banner, setBanner] = useState();
 
-    {/* Get Products Function */ }
-    const getProducts = async () => {
-        let result = await Fetch(host + `/api/products?page=${page + 1}&search=${search}`, 'GET', null);
+    {/* Get Banners Function */ }
+    const getBanners = async () => {
+        let result = await Fetch(host + `/api/banners?page=${page + 1}&search=${search}`, 'GET', null);
         if (result.status === 200) {
             setTotalPages(result.data.data.pagination.last_page);
-            setProductsCounts(result.data.data.pagination.total);
-            setProducts(result.data.data.products);
+            setBannersCounts(result.data.data.pagination.total);
+            setBanners(result.data.data.banners);
             setCurrentPage(page);
         }
 
         setGetWait(false);
     }
 
-    {/*  Get Specefic Product Details */ }
-    const productDetails = async (id) => {
-        setProduct(products.filter((product) => product.id === id)[0]);
+    {/*  Get Specefic Banner Details */ }
+    const bannerDetails = async (id) => {
+        setBanner(banners.filter((banner) => banner.id === id)[0]);
     }
 
-    {/* Delete Product Function */ }
-    const deleteProduct = async () => {
-        let result = await Fetch(host + `/employee/products/${product.id}`, 'DELETE', null);
+    {/* Delete Banner Function */ }
+    const deleteBanner = async () => {
+        let result = await Fetch(host + `/admin/banners/${banner.id}`, 'DELETE', null);
 
         if (result.status === 200) {
-            setProducts((prevProducts) => prevProducts.filter((prevProduct) => prevProduct.id !== product.id));
-            setProductsCounts(productsCounts - 1);
+            setBanners((prevBanners) => prevBanners.filter((prevBanner) => prevBanner.id !== banner.id));
+            setBannersCounts(bannersCounts - 1);
             setSnackBar('success', <FormattedMessage id="deleted_success" />);
-            setProduct('');
+            setBanner('');
         }
     }
 
     useEffect(() => {
-        getProducts();
+        getBanners();
     }, [page, search]);
 
     return (
@@ -90,10 +88,10 @@ function Products() {
                                     <Box sx={{ backgroundColor: theme.palette.background.paper }} className="bg-white rounded-xl px-2">
                                         {/* Top Section */}
                                         <Box sx={{ backgroundColor: theme.palette.background.default }} className="flex justify-between items-center px-2">
-                                            <Typography variant="h5" className="py-2 px-3 max-sm:!text-lg"><FormattedMessage id='products' /></Typography>
+                                            <Typography variant="h5" className="py-2 px-3 max-sm:!text-lg"><FormattedMessage id='banners' /></Typography>
                                             <Button variant="contained" onClick={() => setPopup('add', 'flex')} className="!bg-purple-500">
                                                 <AddIcon />
-                                                <FormattedMessage id='add_product' />
+                                                <FormattedMessage id='add_banner' />
                                             </Button>
                                         </Box>
 
@@ -105,48 +103,59 @@ function Products() {
                                                     <Box className="w-full flex items-center">
                                                         {/* <FilterAltOutlinedIcon onClick={() => setPopup('filter', 'flex')} className="cursor-pointer" fontSize="large" /> */}
                                                         <Box className="w-2/4 relative mr-3 max-sm:w-full">
-                                                            <input style={{ backgroundColor: theme.palette.background.default }} onChange={(e) => setSearch(e.target.value)} className="w-11/12 h-12 rounded-md border indent-14 outline-none max-sm:w-full" placeholder={intl.formatMessage({ id: "search_product" })} />
+                                                            <input style={{ backgroundColor: theme.palette.background.default }} onChange={(e) => setSearch(e.target.value)} className="w-11/12 h-12 rounded-md border indent-14 outline-none max-sm:w-full" placeholder={intl.formatMessage({ id: "search_banner" })} />
                                                             <SearchOutlinedIcon className="absolute top-1/2 -translate-y-1/2 right-3 text-gray-500" sx={{ right: language === 'en' && '90%' }} />
                                                         </Box>
                                                     </Box>
                                                     <Box className="flex w-2/4 items-center justify-end max-sm:mt-2 max-sm:w-full max-sm:justify-between">
-                                                        <Typography variant="body1" className="!text-gray-500"><FormattedMessage id='total_products' />: {productsCounts}</Typography>
+                                                        <Typography variant="body1" className="!text-gray-500"><FormattedMessage id='total_banners' />: {bannersCounts}</Typography>
                                                     </Box>
                                                 </Box>
 
-                                                {/* Products Table */}
+                                                {/* Banners Table */}
                                                 <Table className="" sx={{ minWidth: 700 }} aria-label="customized table">
                                                     <TableHead className="bg-gray-200">
                                                         <TableRow sx={{ backgroundColor: theme.palette.background.paper }}>
                                                             <StyledTableCell align={language === 'en' ? "left" : "right"}><FormattedMessage id='image' /></StyledTableCell>
-                                                            <StyledTableCell align={language === 'en' ? "left" : "right"}><FormattedMessage id='product' /></StyledTableCell>
+                                                            <StyledTableCell align={language === 'en' ? "left" : "right"}><FormattedMessage id='title' /></StyledTableCell>
                                                             <StyledTableCell align={language === 'en' ? "left" : "right"}><FormattedMessage id='category' /></StyledTableCell>
-                                                            <StyledTableCell align={language === 'en' ? "left" : "right"}><FormattedMessage id='price' /></StyledTableCell>
-                                                            <StyledTableCell align={language === 'en' ? "left" : "right"}><FormattedMessage id='amount' /></StyledTableCell>
+                                                            <StyledTableCell align={language === 'en' ? "left" : "right"}><FormattedMessage id='product' /></StyledTableCell>
+                                                            <StyledTableCell align={language === 'en' ? "left" : "right"}><FormattedMessage id='start_date' /></StyledTableCell>
+                                                            <StyledTableCell align={language === 'en' ? "left" : "right"}><FormattedMessage id='end_date' /></StyledTableCell>
+                                                            <StyledTableCell align={language === 'en' ? "left" : "right"}><FormattedMessage id='status' /></StyledTableCell>
                                                             <StyledTableCell align={language === 'en' ? 'left' : 'right'} className="!text-center"><FormattedMessage id='procedures' /></StyledTableCell>
                                                         </TableRow>
                                                     </TableHead>
                                                     <TableBody>
-                                                        {products.map((product, index) => (
+                                                        {banners.map((banner, index) => (
                                                             <StyledTableRow key={index} className="hover:bg-gray-200 duration-100 cursor-pointer">
                                                                 <StyledTableCell align={language === 'en' ? "left" : "right"} component="th" scope="row">
                                                                     {
-                                                                        product.images.length != 0 ?
-                                                                            <Avatar onClick={(e) => { productDetails(product.id); setPopup('gallery', 'flex') }} className="w-10 h-10" src={`${host}/${product.images[0].image}`} />
+                                                                        banner.images.length != 0 ?
+                                                                            <Avatar onClick={(e) => { bannerDetails(banner.id); setPopup('gallery', 'flex') }} className="w-10 h-10" src={`${host}/${banner.images[0].image}`} />
                                                                             :
                                                                             <Box className='w-10 h-10 rounded-full bg-gray-400 text-white text-3xl flex justify-center items-center'>
-                                                                                {product.name_en.charAt(0)}
+                                                                                {banner.name_en.charAt(0)}
                                                                             </Box>
                                                                     }
                                                                 </StyledTableCell>
-                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{language === 'en' ? product.name_en : product.name_ar}</StyledTableCell>
-                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{language === 'en' ? product.category.name_en : product.category.name_ar}</StyledTableCell>
-                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{product.price}</StyledTableCell>
-                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{product.amount}</StyledTableCell>
+                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{language === 'en' ? banner.name_en : banner.name_ar}</StyledTableCell>
+                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{language === 'en' ? banner.category.name_en : banner.category.name_ar}</StyledTableCell>
+                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{language === 'en' ? banner.product.name_en : banner.product.name_ar}</StyledTableCell>
+                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{banner.start_date}</StyledTableCell>
+                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">{banner.end_date}</StyledTableCell>
+                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className="">
+                                                                    {
+                                                                        banner.status ?
+                                                                            <Typography variant="body1" fontWeight={800} color="success"><FormattedMessage id="active" /></Typography>
+                                                                            :
+                                                                            <Typography variant="body1" fontWeight={800} color="error"><FormattedMessage id="deactive" /></Typography>
+                                                                    }
+                                                                </StyledTableCell>
                                                                 <StyledTableCell align="right">
                                                                     <Box className="!flex justify-center items-center">
-                                                                        <Button variant="contained" className="!bg-red-300 !font-bold !text-red-800 hover:!bg-red-500 hover:!text-white duration-300 !mr-2" onClick={(e) => { productDetails(product.id); setPopup('delete', 'flex') }}><FormattedMessage id='delete' /></Button>
-                                                                        <Button variant="contained" className="!bg-green-300 !font-bold !text-green-800 hover:!bg-green-500 hover:!text-white duration-300" onClick={(e) => { productDetails(product.id); setPopup('update', 'flex') }}><FormattedMessage id='update' /></Button>
+                                                                        <Button variant="contained" className="!bg-red-300 !font-bold !text-red-800 hover:!bg-red-500 hover:!text-white duration-300 !mr-2" onClick={(e) => { bannerDetails(banner.id); setPopup('delete', 'flex') }}><FormattedMessage id='delete' /></Button>
+                                                                        <Button variant="contained" className="!bg-green-300 !font-bold !text-green-800 hover:!bg-green-500 hover:!text-white duration-300" onClick={(e) => { bannerDetails(banner.id); setPopup('update', 'flex') }}><FormattedMessage id='update' /></Button>
                                                                     </Box>
                                                                 </StyledTableCell>
                                                             </StyledTableRow>
@@ -170,24 +179,24 @@ function Products() {
                             }
                         </Box>
 
-                        {/* Add New Product Popup */}
+                        {/* Add New Banner Popup */}
                         <Box id="add" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center">
-                            <AddProduct setProducts={setProducts} onClickCancel={() => setPopup('add', 'none')} setSnackBar={setSnackBar} />
+                            <AddBanner setBanners={setBanners} onClickCancel={() => setPopup('add', 'none')} setSnackBar={setSnackBar} />
                         </Box>
 
-                        {/* Product Images Popup */}
+                        {/* Banner Images Popup */}
                         <Box id="gallery" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center">
-                            <ProductImages setSnackBar={setSnackBar} setProducts={setProducts} images={product?.images} onClickCancel={() => setPopup('gallery', 'none')} />
+                            <BannerImages setSnackBar={setSnackBar} setBanners={setBanners} images={banner?.images} onClickCancel={() => setPopup('gallery', 'none')} />
                         </Box>
 
-                        {/* Update Product Popup */}
+                        {/* Update Banner Popup */}
                         <Box id="update" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center">
-                            <UpdateProduct product={product} onClickCancel={() => setPopup('update', 'none')} getProducts={getProducts} setSnackBar={setSnackBar} />
+                            <UpdateBanner banner={banner} onClickCancel={() => setPopup('update', 'none')} getBanners={getBanners} setSnackBar={setSnackBar} />
                         </Box>
 
                         {/* Delete Product Popup */}
                         <Box id="delete" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center">
-                            <DeleteDialog onClickConfirm={deleteProduct} onClickCancel={() => setPopup('delete', 'none')} title={<FormattedMessage id="delete_product_title" />} subtitle={<FormattedMessage id="delete_product_description" />} />
+                            <DeleteDialog onClickConfirm={deleteBanner} onClickCancel={() => setPopup('delete', 'none')} title={<FormattedMessage id="delete_banner_title" />} subtitle={<FormattedMessage id="delete_banner_description" />} />
                         </Box>
 
                         {/* Snackbar Alert */}
@@ -198,4 +207,4 @@ function Products() {
     );
 }
 
-export default Products;
+export default Banners;

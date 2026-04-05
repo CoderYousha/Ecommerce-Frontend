@@ -6,7 +6,7 @@ import Fetch from "../services/Fetch";
 import { useEffect, useState } from "react";
 import { useWaits } from "../hooks/UseWait";
 
-function ProductImages({ images, onClickCancel, setSnackBar, setProducts }) {
+function BannerImages({ images, onClickCancel, setSnackBar, setBanners }) {
     const theme = useTheme();
     const { language, host } = useConstants();
     const { sendWait, setSendWait } = useWaits();
@@ -16,18 +16,18 @@ function ProductImages({ images, onClickCancel, setSnackBar, setProducts }) {
     const deleteImage = async (image) => {
         setImageId(image.id);
         setSendWait(true);
-        let result = await Fetch(host + `/employee/products/images/${image.id}`, 'DELETE', null);
+        let result = await Fetch(host + `/admin/banners/image/${image.id}`, 'DELETE', null);
 
         if (result.status === 200) {
             setSnackBar('success', 'deleted_success');
-            setProducts((products) =>
-                products.map((product) =>
-                    product.id === image.product_id
+            setBanners((banners) =>
+                banners.map((banner) =>
+                    banner.id === image.banner_id
                         ? {
-                            ...product,
-                            images: product.images.filter((img) => img.id !== 23),
+                            ...banner,
+                            images: banner.images.filter((img) => img.id !== 23),
                         }
-                        : product
+                        : banner
                 )
             );
             setImgs((prevImgs) => prevImgs.filter((prevImg) => prevImg.id !== image.id));
@@ -61,4 +61,4 @@ function ProductImages({ images, onClickCancel, setSnackBar, setProducts }) {
     );
 }
 
-export default ProductImages;
+export default BannerImages;
