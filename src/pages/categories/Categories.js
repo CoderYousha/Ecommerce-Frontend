@@ -169,7 +169,7 @@ function Categories() {
                             <AddCategory setCategories={setCategories} onClickCancel={() => setPopup('add', 'none')} setSnackBar={setSnackBar} />
                         </Box>
 
-                        {/* Update Client Popup */}
+                        {/* Update Category Popup */}
                         <Box id="update" sx={{ right: language === 'en' && '0' }} className="w-4/5 h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center">
                             <UpdateCategory category={category} onClickCancel={() => setPopup('update', 'none')} getCategories={getCategories} setSnackBar={setSnackBar} />
                         </Box>

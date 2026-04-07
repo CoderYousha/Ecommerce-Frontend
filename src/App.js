@@ -15,6 +15,7 @@ import UserRoutes from './routes/UserRoutes';
 import CategoryRoutes from './routes/CategoryRoutes';
 import ProductRoutes from './routes/ProductRoutes';
 import BannerRoutes from './routes/BannerRoutes';
+import OrderRoutes from './routes/OrderRoutes';
 
 function App() {
   const { language } = useConstants();
@@ -54,6 +55,11 @@ function App() {
               }
               {
                 BannerRoutes().map((route, index) =>
+                  <Route key={index} path={route.path} element={<AuthProvider><Sidebar />{route.element}</AuthProvider>} />
+                )
+              }
+              {
+                OrderRoutes().map((route, index) =>
                   <Route key={index} path={route.path} element={<AuthProvider><Sidebar />{route.element}</AuthProvider>} />
                 )
               }
