@@ -77,6 +77,10 @@ function Orders() {
         );
         if (result.status === 200) {
             setSnackBar('success', <FormattedMessage id="updated_success" />);
+            if(status && status === 'canceled'){
+                const url = `https://wa.me/${order.user.whatsapp_phone}?text=Order ID: ${order.id} Canceled`
+                window.open(url, '_blank');
+            }
         }
 
         setSendWait(false);
