@@ -34,7 +34,7 @@ function LogoutPopup({ onClickCancel}) {
             <Typography className="text-center !font-semibold" variant="h6"><FormattedMessage id="logout"/></Typography>
             <Typography className="text-center !my-3" variant="body2" dir={language === 'en' ? 'ltr' : 'rtl'}><FormattedMessage id="logout_description"/></Typography>
             <Box className="flex justify-between mt-5">
-                <Button onClick={logout} variant="contained" className="w-2/5 !bg-purple-300 !text-purple-700 hover:!bg-red-500 hover:!text-white duration-300 !font-bold">
+                <Button onClick={logout} variant="contained" className="w-2/5 !bg-purple-300 !text-purple-700 hover:!bg-purple-500 hover:!text-white duration-300 !font-bold">
                     {
                         sendWait ?
                             <CircularProgress size={20} className="" color="white" />

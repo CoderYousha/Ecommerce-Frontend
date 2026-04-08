@@ -70,7 +70,7 @@ function Translation() {
             system_language: "System Language",
             system_language_description: "Change the interface language",
             product_management: "Product Management",
-            product_management_description: "Create, Uudate and delete product",
+            product_management_description: "Create, update and delete product",
             category_management: "Category Management",
             category_management_description: "Create, update and delete category",
             user_management: "User Management",
