@@ -16,8 +16,6 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import Fetch from "../../services/Fetch";
 import DeleteDialog from "../../popup/DeleteDialog";
-import AddCategory from "../../popup/AddCategory";
-import UpdateCategory from "../../popup/UpdateCategory";
 import AddProduct from "../../popup/AddProduct";
 import ProductImages from "../../popup/ProductImages";
 import UpdateProduct from "../../popup/UpdateProduct";

@@ -10,11 +10,15 @@ import { FormattedMessage } from "react-intl";
 import AuthContext from "../context/AuthContext";
 import { useContext } from "react";
 import { useConstants } from "../hooks/UseConstants";
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import { usePopups } from "../hooks/UsePopups";
+import LogoutPopup from "../popup/Logout";
 
 function Sidebar() {
-    const {host} = useConstants();
+    const { host } = useConstants();
     const { wait, profile } = useContext(AuthContext);
     const navigate = useNavigate();
+    const { setPopup } = usePopups();
     const contents = [
         {
             "title": <FormattedMessage id="employees" />,
@@ -79,9 +83,16 @@ function Sidebar() {
                                 </NavLink>
                             )
                         }
+                        <Box className='mt-5 flex justify-between cursor-pointer rounded-full px-3 py-2' onClick={() => setPopup('logout', 'flex')}>
+                            <LogoutOutlinedIcon fontSize="large" className="text-purple-500" />
+                            <Typography variant="h6" className="max-sm:hidden" style={{ color: '#A855F7' }}><FormattedMessage id="logout" /></Typography>
+                        </Box>
                     </Box>
                 </Box>
             }
+            <Box id="logout" className="w-screen h-screen fixed top-0 bg-gray-200 bg-opacity-5 hidden justify-center items-center max-sm:left-0" sx={{ zIndex: 1000 }}>
+                <LogoutPopup onClickCancel={() => setPopup('logout', 'none')} />
+            </Box>
         </>
     );
 }

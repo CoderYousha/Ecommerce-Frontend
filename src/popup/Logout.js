@@ -15,7 +15,7 @@ function LogoutPopup({ onClickCancel}) {
     const logout = async () => {
         setSendWait(true);
 
-        let result = await Fetch(host + '/logout', 'POST');
+        let result = await Fetch(host + '/api/logout', 'POST');
 
         if(result.status === 200){
             localStorage.removeItem('token');
@@ -32,7 +32,7 @@ function LogoutPopup({ onClickCancel}) {
                 <Logout className="" fontSize="large" color="error"/>
             </Box>
             <Typography className="text-center !font-semibold" variant="h6"><FormattedMessage id="logout"/></Typography>
-            <Typography className="text-center !my-3" variant="body2" dir="rtl"><FormattedMessage id="logout_description"/></Typography>
+            <Typography className="text-center !my-3" variant="body2" dir={language === 'en' ? 'ltr' : 'rtl'}><FormattedMessage id="logout_description"/></Typography>
             <Box className="flex justify-between mt-5">
                 <Button onClick={logout} variant="contained" className="w-2/5 !bg-red-300 !text-red-700 hover:!bg-red-500 hover:!text-white duration-300 !font-bold">
                     {

@@ -9,7 +9,7 @@ import Fetch from '../../services/Fetch';
 import { useNavigate } from 'react-router-dom';
 import { useWaits } from '../../hooks/UseWait';
 import CheckLogin from '../../services/CheckLogin';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 function Login() {
     const { host } = useConstants();
@@ -22,7 +22,7 @@ function Login() {
     const checkLogin = async () => {
         let result = await CheckLogin(host);
         if (result) {
-            navigate('/profile');
+            navigate('/employees');
         } else {
             setGetWait(false);
         }

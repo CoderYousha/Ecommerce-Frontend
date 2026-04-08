@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, CircularProgress, Divider, FormControlLabel, TextField, Typography, useTheme } from "@mui/material";
+import { Box, Button, Divider, TextField, Typography, useTheme } from "@mui/material";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useConstants } from "../hooks/UseConstants";
 import CloseIcon from '@mui/icons-material/Close';
