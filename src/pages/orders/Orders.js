@@ -111,10 +111,6 @@ function Orders() {
                                         {/* Top Section */}
                                         <Box sx={{ backgroundColor: theme.palette.background.default }} className="flex justify-between items-center px-2">
                                             <Typography variant="h5" className="py-2 px-3 max-sm:!text-lg"><FormattedMessage id='orders' /></Typography>
-                                            {/* <Button variant="contained" onClick={() => setPopup('add', 'flex')} className="!bg-purple-500">
-                                                <AddIcon />
-                                                <FormattedMessage id='add_category' />
-                                            </Button> */}
                                         </Box>
 
 
@@ -123,7 +119,6 @@ function Orders() {
                                                 {/* Top Table */}
                                                 <Box className="min-h-12 py-2 px-2 flex justify-between items-center max-sm:flex-col">
                                                     <Box className="w-full flex items-center">
-                                                        {/* <FilterAltOutlinedIcon onClick={() => setPopup('filter', 'flex')} className="cursor-pointer" fontSize="large" /> */}
                                                         <Box className="w-2/4 relative mr-3 max-sm:w-full">
                                                             <input style={{ backgroundColor: theme.palette.background.default }} onChange={(e) => setSearch(e.target.value)} className="w-11/12 h-12 rounded-md border indent-14 outline-none max-sm:w-full" placeholder={intl.formatMessage({ id: "search_order" })} />
                                                             <SearchOutlinedIcon className="absolute top-1/2 -translate-y-1/2 right-3 text-gray-500" sx={{ right: language === 'en' && '90%' }} />
@@ -140,7 +135,6 @@ function Orders() {
                                                         <TableRow sx={{ backgroundColor: theme.palette.background.paper }}>
                                                             <StyledTableCell align={language === 'en' ? "left" : "right"}><FormattedMessage id='id' /></StyledTableCell>
                                                             <StyledTableCell align={language === 'en' ? "left" : "right"}><FormattedMessage id='client' /></StyledTableCell>
-                                                            <StyledTableCell align={language === 'en' ? "left" : "right"}><FormattedMessage id='payment_method' /></StyledTableCell>
                                                             <StyledTableCell align={language === 'en' ? "left" : "right"} className=""><FormattedMessage id='payment_status' /></StyledTableCell>
                                                             <StyledTableCell align={language === 'en' ? "left" : "right"} className=""><FormattedMessage id='status' /></StyledTableCell>
                                                             <StyledTableCell align={language === 'en' ? 'left' : 'right'} className="!text-center"><FormattedMessage id='procedures' /></StyledTableCell>
@@ -165,7 +159,6 @@ function Orders() {
                                                                         <Typography variant="body2">{order.user.full_name}</Typography>
                                                                     </Box>
                                                                 </StyledTableCell>
-                                                                <StyledTableCell align={language === 'en' ? "left" : "right"} className=""><FormattedMessage id={order.payment_method} /></StyledTableCell>
                                                                 <StyledTableCell align={language === 'en' ? "left" : "right"} className="">
                                                                     <select value={order.payment_status} disabled={sendWait} onChange={(e) => changeStatus(order, null, e.target.value)} className="bg-transparent outline-none">
                                                                         <option value='pending'><FormattedMessage id="pending" /></option>
