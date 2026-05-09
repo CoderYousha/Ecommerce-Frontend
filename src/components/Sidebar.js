@@ -70,7 +70,7 @@ function Sidebar() {
                             {/* <Avatar className="cursor-pointer" alt="Cindy Baker" src="/static/images/avatar/1.jpg" /> */}
                         </Box>
                         <Box className='!ml-5 max-sm:hidden'>
-                            <Typography variant="h6" fontWeight={800}>John Mal</Typography>
+                            <Typography variant="h6" fontWeight={800}>{profile.full_name}</Typography>
                             <Typography variant="body2">Admin</Typography>
                         </Box>
                     </Box>
