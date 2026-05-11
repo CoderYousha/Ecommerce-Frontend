@@ -152,6 +152,7 @@ function Translation() {
             total_items: "Total Items",
             items: "Items",
             total_price: "Total Price",
+            send_whatsapp: "Send Whatsapp",
         },
         ar: {
             procedures: "الإجراءات",
@@ -307,6 +308,7 @@ function Translation() {
             total_items: "إجمالي العناصر",
             items: "العناصر",
             total_price: "السعر الإجمالي",
+            send_whatsapp: "إرسال إلى واتساب",
         }
     };
 }

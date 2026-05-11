@@ -56,7 +56,7 @@ function Sidebar() {
         <>
             {
                 !wait &&
-                <Box className='w-1/5 h-screen overflow-y-scroll none-view-scroll bg-white px-5 float-left'>
+                <Box className='w-1/5 h-screen overflow-y-scroll none-view-scroll bg-white px-5 float-left fixed left-0'>
                     <Box className='py-5 flex items-center'>
                         <Box className='px-1 py-1 border border-purple-400 border-r-4 border-b-4 rounded-full relative'>
                             {
